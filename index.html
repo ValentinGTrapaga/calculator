@@ -8,34 +8,31 @@
     <title>Calculator</title>
 </head>
 <body>
-    <main>
-        <div id="calculator">
+    <main id="calculator">
             <div id="display">
-                Hi
+                <div id ="previousDisp"></div>
+                <div id="currentDisp"></div>
             </div>
             <div id="keyboard">
-                <button class="operand">AC</button>
-                <button class="operand">^</button>
-                <button class="operand">/</button>
-                <button class="operand">Del</button>
-                <button class="number">9 </button>
-                <button class="number">8 </button>
-                <button class="number">7 </button>
-                <button class="operand">+</button>
-                <button class="number">6 </button>
-                <button class="number">5</button>
-                <button class="number">4</button>
-                <button class="operand">-</button>
-                <button class="number">3</button>
-                <button class="number">2</button>
-                <button class="number">1</button>
-                <button class="operand">x</button>
-                <button class="number">0</button>
-                <button class="dec">.</button>
-                <button id ="equal" class="operand">=</button>
+                <button type="button" id="clear" class="key" value="clear" >AC</button>
+                <button type="button" class="operator key" value="/" >/</button>
+                <button type="button" class="operand key" value="7" >7</button>
+                <button type="button" class="operand key" value="8" >8</button>
+                <button type="button" class="operand key" value="9" >9</button>
+                <button type="button" class="operator key" value="*" >*</button>
+                <button type="button" class="operand key" value="4" >4</button>
+                <button type="button" class="operand key" value="5" >5</button>
+                <button type="button" class="operand key" value="6" >6</button>
+                <button type="button" class="operator key" value="-" >-</button>
+                <button type="button" class="operand key" value="1" >1</button >
+                <button type="button" class="operand key" value="2" >2</button >
+                <button type="button" class="operand key" value="3" >3</button >
+                <button type="button" class="operator key" value="+" >+</button >
+                <button type="button" id ="zero" class="operand key" value="0" >0</button>
+                <button type="button" id="decimal" class="operand key" value=".">.</button>
+                <button type="button" id="equal" class="key" value="=" >=</button>
             </div>
-        </div>
     </main>
+    <script src="script.js"></script>
 </body>
-<script src="script.js"></script>
 </html>

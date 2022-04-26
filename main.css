@@ -9,7 +9,6 @@ html {
     width: 300px;
     padding: 4px;
     background-color: black;
-    margin: auto;
     border-radius: 5px;
     position: absolute;
     top: 50%;
@@ -21,14 +20,21 @@ html {
     background-color: rgb(100, 134, 105);
     color: aliceblue;
     width: auto;
-    height: 50px;
+    height: 70px;
     margin: auto;
+    padding-right: 4px;
     border-radius: 2px;
     font-family: "Orbitron", sans-serif;
     font-weight: 400;
     font-size: 2.8rem;
     text-align: end;
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#previousDisp {
+    height: 18px;
+    font-size: 1rem;
 }
 
 #keyboard {
@@ -37,9 +43,10 @@ html {
     grid-template-rows: repeat(5, 1fr);
     gap: 4px;
     padding-top: 4px;
+    background-color: #003b62;
 }
 
-button {
+.key {
     font-family: "Orbitron", sans-serif;
     color: #ffffff !important;
     font-size: 1rem;
@@ -49,9 +56,10 @@ button {
     border: 0px;
     background: #1d9aee;
     width: auto;
+    text-align: center;
 }
 
-button:active {
+.key:active {
     background-color: rgb(33, 33, 156);
 }
 
@@ -61,5 +69,21 @@ button:active {
 }
 
 #equal:active {
+    background-color: rgb(107, 55, 17);
+}
+
+#clear {
+    grid-column: span 3;
+    background-color: chocolate;
+    font-family: "Orbitron", sans-serif;
+    color: #ffffff !important;
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 10px 25px;
+    border-radius: 2px;
+}
+
+#clear:active {
     background-color: rgb(107, 55, 17);
 }
