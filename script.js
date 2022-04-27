@@ -37,7 +37,7 @@ const keyboard = document.getElementById('keyboard')
 let currentNum = ""
 let previousNum = ""
 let operator = ""
-let answer = 0
+let answer = undefined
 
 // Disable the decimal after pressed
 
@@ -46,7 +46,7 @@ function disableDec() {
 }
 
 function enableDec() {
-    decimal.disabled = "false"
+    decimal.disabled = false
 }
 
 function operate(operator, num1, num2 = 0) {
@@ -73,13 +73,17 @@ function operate(operator, num1, num2 = 0) {
 }
 
 function handleOperator(op) {
-    operator = op
-    previousNum = currentNum
-    currentNum = ""
-/*     previousDisp.innerText = `${previousNum} ${op}`
-    currentNum = ""
-    currentDisp.innerText = `${currentNum}` */
-    displayResults()
+    if (operator == "") {
+        enableDec()
+        operator = op
+        previousNum = currentNum
+        previousDisp.innerText = `${previousNum} ${op}`
+        currentNum = ""
+        currentDisp.innerText = `${currentNum}`
+    } else {
+        calculate()
+
+    }
 }
 
 function displayResults() {
@@ -90,6 +94,8 @@ function displayResults() {
 function calculate() {
     answer = operate(operator, previousNum, currentNum)
     displayResults()
+    currentNum = answer
+    enableDec()
 }
 
 // Ok!
@@ -99,6 +105,7 @@ function clearCalculator() {
     answer = 0
     previousDisp.innerText = ""
     currentDisp.innerText = ""
+    enableDec()
 }
 
 //Need to check for two numbers
@@ -120,7 +127,6 @@ numbers.forEach(btn => btn.addEventListener('click', function typeNums() {
     if(btn.value == ".") {
         disableDec()
     }
-    enableDec()
     currentDisp.innerText = `${currentNum}`
 }
 ))
