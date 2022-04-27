@@ -26,9 +26,9 @@ function divide(num1, num2) {
 
 const operators = document.querySelectorAll('.operator')
 const numbers = document.querySelectorAll('.operand')
-const decimal = document.querySelector('#decimal')
 const equal = document.querySelector('#equal')
 
+const decimal = document.getElementById('decimal')
 const clear = document.getElementById('clear')
 const previousDisp = document.getElementById('previousDisp')
 const currentDisp = document.getElementById('currentDisp')
@@ -38,6 +38,16 @@ let currentNum = ""
 let previousNum = ""
 let operator = ""
 let answer = 0
+
+// Disable the decimal after pressed
+
+function disableDec() {
+    decimal.disabled = "true"
+}
+
+function enableDec() {
+    decimal.disabled = "false"
+}
 
 function operate(operator, num1, num2 = 0) {
     console.log("Esta es la cuenta: " + num1 + " " + operator + " " + + num2)
@@ -58,37 +68,31 @@ function operate(operator, num1, num2 = 0) {
             answer = divide(num1, num2)
             break;
     }
-    return answer
+    // Rounded number to 8 significant places
+    return (Math.round(answer * 10000) / 10000).toString()
 }
-// Display the number being typed
-numbers.forEach(btn => btn.addEventListener('click', function typeNums() {
-    console.log(btn.value)
-    if (currentNum.length < 8) {
-        currentNum += btn.innerText
-    }
-    currentDisp.innerText = `${currentNum}`
-}
-))
-
-operators.forEach(op => op.addEventListener('click', e => {
-    handleOperator(e.target.textContent)
-}))
 
 function handleOperator(op) {
     operator = op
     previousNum = currentNum
-    previousDisp.innerText = `${previousNum} ${op}`
     currentNum = ""
-    currentDisp.innerText = `${currentNum}`
+/*     previousDisp.innerText = `${previousNum} ${op}`
+    currentNum = ""
+    currentDisp.innerText = `${currentNum}` */
+    displayResults()
+}
+
+function displayResults() {
+    previousDisp.innerText = `${previousNum} ${operator} ${currentNum}`
+    currentDisp.innerText = `${answer}`
 }
 
 function calculate() {
     answer = operate(operator, previousNum, currentNum)
-    previousDisp.innerText = `${previousNum} ${operator} ${currentNum} =`
-    currentDisp.innerText = `${answer}`
-    currentNum = answer
+    displayResults()
 }
 
+// Ok!
 function clearCalculator() {
     previousNum = ""
     currentNum = ""
@@ -106,3 +110,22 @@ equal.addEventListener('click', () => {
 
 // Programming clear key
 clear.addEventListener('click', clearCalculator)
+
+// Display the number being typed
+numbers.forEach(btn => btn.addEventListener('click', function typeNums() {
+    console.log(btn.value)
+    if (currentNum.length < 8) {
+        currentNum += btn.innerText
+    }
+    if(btn.value == ".") {
+        disableDec()
+    }
+    enableDec()
+    currentDisp.innerText = `${currentNum}`
+}
+))
+
+// Handle operators when clicked
+operators.forEach(op => op.addEventListener('click', e => {
+    handleOperator(e.target.textContent)
+}))
