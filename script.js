@@ -115,8 +115,8 @@ function clearCalculator() {
 equal.addEventListener('click', () => {
     if (currentNum != "" && previousNum != "") {
         calculate()
-        previousNum = answer
-        currentNum = ""
+        currentNum = answer
+        operator = ""
     }
 })
 
