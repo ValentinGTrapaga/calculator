@@ -23,7 +23,6 @@ function divide(num1, num2) {
 
 
 // Grab the buttons from the HTML
-
 const operators = document.querySelectorAll('.operator')
 const numbers = document.querySelectorAll('.operand')
 const equal = document.querySelector('#equal')
@@ -40,7 +39,6 @@ let operator = ""
 let answer = 0
 
 // Disable the decimal after pressed
-
 function disableDec() {
     decimal.disabled = "true"
 }
@@ -48,6 +46,7 @@ function disableDec() {
 function enableDec() {
     decimal.disabled = false
 }
+
 
 function operate(operator, num1, num2) {
     console.log("Esta es la cuenta: " + num1 + " " + operator + " " + + num2)
@@ -68,11 +67,12 @@ function operate(operator, num1, num2) {
             answer = divide(num1, num2)
             break;
     }
-    // Rounded number to 8 significant places
+    // Rounded number and gives it back as a string
     return (Math.round(answer * 10000) / 10000).toString()
 }
 
 function handleOperator(op) {
+    // If its the start of the operation
     if (operator == "") {
         enableDec()
         operator = op
@@ -81,6 +81,8 @@ function handleOperator(op) {
         currentNum = ""
         currentDisp.innerText = `${currentNum}`
     } else {
+        // If its already been typed some operator and 
+        // need to do operations consecutively
         calculate()
         previousNum = answer
         currentNum = ""
