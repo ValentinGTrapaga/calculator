@@ -37,7 +37,7 @@ const keyboard = document.getElementById('keyboard')
 let currentNum = ""
 let previousNum = ""
 let operator = ""
-let answer = undefined
+let answer = 0
 
 // Disable the decimal after pressed
 
@@ -81,8 +81,11 @@ function handleOperator(op) {
         currentNum = ""
         currentDisp.innerText = `${currentNum}`
     } else {
+        operator = op
         calculate()
-
+        previousNum = answer
+        currentNum = ""
+        displayResults()
     }
 }
 
@@ -94,7 +97,6 @@ function displayResults() {
 function calculate() {
     answer = operate(operator, previousNum, currentNum)
     displayResults()
-    currentNum = answer
     enableDec()
 }
 
@@ -102,6 +104,7 @@ function calculate() {
 function clearCalculator() {
     previousNum = ""
     currentNum = ""
+    operator = ""
     answer = 0
     previousDisp.innerText = ""
     currentDisp.innerText = ""
@@ -112,6 +115,8 @@ function clearCalculator() {
 equal.addEventListener('click', () => {
     if (currentNum != "" && previousNum != "") {
         calculate()
+        previousNum = answer
+        currentNum = ""
     }
 })
 
@@ -120,18 +125,22 @@ clear.addEventListener('click', clearCalculator)
 
 // Display the number being typed
 numbers.forEach(btn => btn.addEventListener('click', function typeNums() {
-    console.log(btn.value)
     if (currentNum.length < 8) {
         currentNum += btn.innerText
     }
     if(btn.value == ".") {
         disableDec()
     }
-    currentDisp.innerText = `${currentNum}`
+    if ( operator == "") { //Si no se realizo una cuenta
+        currentDisp.innerText = `${currentNum}`
+
+    } else {
+        currentDisp.innerText = `${currentNum}`
+    }
 }
 ))
 
 // Handle operators when clicked
-operators.forEach(op => op.addEventListener('click', e => {
-    handleOperator(e.target.textContent)
+operators.forEach(op => op.addEventListener('click', () => {
+    handleOperator(op.innerText)
 }))
