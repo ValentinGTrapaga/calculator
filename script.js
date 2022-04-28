@@ -49,7 +49,7 @@ function enableDec() {
     decimal.disabled = false
 }
 
-function operate(operator, num1, num2 = 0) {
+function operate(operator, num1, num2) {
     console.log("Esta es la cuenta: " + num1 + " " + operator + " " + + num2)
     num1 = Number(num1)
     num2 = Number(num2)
@@ -81,10 +81,10 @@ function handleOperator(op) {
         currentNum = ""
         currentDisp.innerText = `${currentNum}`
     } else {
-        operator = op
         calculate()
         previousNum = answer
         currentNum = ""
+        operator = op
         displayResults()
     }
 }
@@ -128,15 +128,10 @@ numbers.forEach(btn => btn.addEventListener('click', function typeNums() {
     if (currentNum.length < 8) {
         currentNum += btn.innerText
     }
-    if(btn.value == ".") {
+    if (btn.value == ".") {
         disableDec()
     }
-    if ( operator == "") { //Si no se realizo una cuenta
-        currentDisp.innerText = `${currentNum}`
-
-    } else {
-        currentDisp.innerText = `${currentNum}`
-    }
+    currentDisp.innerText = `${currentNum}`
 }
 ))
 
